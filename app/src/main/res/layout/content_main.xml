@@ -8,12 +8,12 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="385dp"
-        android:layout_marginTop="8dp"
+    <EditText
+        android:layout_width="391dp"
+        android:layout_height="523dp"
         android:gravity="top"
         android:hint="Type note here..."
+        android:id="@+id/Note1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
