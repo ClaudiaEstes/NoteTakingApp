@@ -1,6 +1,7 @@
 package com.cdestes.notetakingapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,10 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
+        Intent myIntent = new Intent(MainActivity.this, SelectNote.class);
+        MainActivity.this.startActivity(myIntent);
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -66,5 +72,32 @@ public class MainActivity extends AppCompatActivity {
         } catch (Throwable t) {
             Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    public boolean FileExists(String fileName){
+        File file = getBaseContext().getFileStreamPath(fileName);
+        return file.exists();
+    }
+
+    public String Open(String fileName) {
+        String note = "";
+        if (FileExists(fileName)) {
+            try {
+                InputStream in = openFileInput(fileName);
+                if ( in != null) {
+                    InputStreamReader tmp = new InputStreamReader( in );
+                    BufferedReader reader = new BufferedReader(tmp);
+                    String str;
+                    StringBuilder buf = new StringBuilder();
+                    while ((str = reader.readLine()) != null) {
+                        buf.append(str + "\n");
+                    } in .close();
+                    note = buf.toString();
+                }
+            } catch (java.io.FileNotFoundException e) {} catch (Throwable t) {
+                Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
+            }
+        }
+        return note;
     }
 }
