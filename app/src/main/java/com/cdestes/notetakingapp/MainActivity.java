@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
             out.write(Note1.getText().toString());
             out.close();
             Toast.makeText(this, "Note Saved!", Toast.LENGTH_SHORT).show();
+            Intent saved = new Intent(MainActivity.this, SelectNote.class);
+            MainActivity.this.startActivity(saved);
         } catch (Throwable t) {
             Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
         }
