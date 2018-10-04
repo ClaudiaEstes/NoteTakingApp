@@ -2,4 +2,5 @@
     <string name="app_name">Note Taking App</string>
     <string name="action_settings">List Notes</string>
     <string name="title_activity_select_note">SelectNote</string>
+    <string name="take_picture">Take Picture</string>
 </resources>

@@ -38,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
                 Save("Note1.txt");
             }
         });
+
+        FloatingActionButton captureImage = ( FloatingActionButton) findViewById(R.id.captureImage);
+        captureImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent captureIntent = new Intent(getApplicationContext(), Capture_Image.class);
+                startActivity(captureIntent);
+            }
+        });
     }
 
     @Override
