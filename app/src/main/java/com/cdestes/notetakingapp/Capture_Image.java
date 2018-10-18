@@ -66,7 +66,6 @@ public class Capture_Image extends Activity {
                 }
                 // Continue only if the File was successfully created
                 if (photoFile != null) {
-                    Toast.makeText(this, "it worked", Toast.LENGTH_SHORT).show();
                     Uri photoURI = FileProvider.getUriForFile(this,
                             "com.cdestes.notetakingapp.fileprovider",
                             photoFile);
@@ -88,6 +87,7 @@ public class Capture_Image extends Activity {
 
 
             //Add image Path To List
+            myList = new ArrayList<String>();
             myList.add( mCurrentPhotoPath);
 
 
