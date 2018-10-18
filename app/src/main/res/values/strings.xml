@@ -4,4 +4,7 @@
     <string name="title_activity_select_note">SelectNote</string>
     <string name="save_prompt">File name here…</string>
     <string name="save">type file name here…</string>
+
+    <string name="take_picture">Take Picture</string>
+    <string name="image_button_text">TAKE PICTURE</string>
 </resources>
