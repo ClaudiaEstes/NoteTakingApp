@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 Save(fileName+".txt");
             }
         });
-<<<<<<< HEAD
+
         editText1 = (EditText) findViewById(R.id.Note1);
         editText1.setText(Open(fileName+".txt"));
 
@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             editText1.setText(Open(extras));
         }
 
-=======
 
         FloatingActionButton captureImage = ( FloatingActionButton) findViewById(R.id.captureImage);
         captureImage.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
->>>>>>> ImageAndRecording
     }
 
     @Override
