@@ -1,5 +1,6 @@
 package com.cdestes.notetakingapp;
 
+import android.animation.FloatArrayEvaluator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent captureIntent = new Intent(getApplicationContext(), Capture_Image.class);
                 startActivity(captureIntent);
+            }
+        });
+
+        FloatingActionButton captureRecording = (FloatingActionButton) findViewById(R.id.capture);
+        captureRecording.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //places function to use recording
+
             }
         });
     }
