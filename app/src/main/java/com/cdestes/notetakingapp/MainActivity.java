@@ -2,12 +2,17 @@ package com.cdestes.notetakingapp;
 
 import android.animation.FloatArrayEvaluator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,29 +21,46 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    EditText Note1;
+    EditText editText1;
+    String fileName;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Note1 = (EditText)findViewById(R.id.Note1);
+        FloatingActionButton fab = findViewById(R.id.fab);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Save("Note1.txt");
+                fileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                Save(fileName+".txt");
             }
         });
+<<<<<<< HEAD
+        editText1 = (EditText) findViewById(R.id.Note1);
+        editText1.setText(Open(fileName+".txt"));
+
+        String extras = getIntent().getStringExtra("fileName");
+        if (extras != null) {
+            editText1.setText(Open(extras));
+        }
+
+=======
 
         FloatingActionButton captureImage = ( FloatingActionButton) findViewById(R.id.captureImage);
         captureImage.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+>>>>>>> ImageAndRecording
     }
 
     @Override
@@ -82,12 +105,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Save(String fileName) {
+        FileOutputStream outputStream;
         try {
-            OutputStreamWriter out =
-                    new OutputStreamWriter(openFileOutput(fileName, 0));
-            out.write(Note1.getText().toString());
-            out.close();
-            Toast.makeText(this, "Note Saved!", Toast.LENGTH_SHORT).show();
+            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream.write(editText1.getText().toString().getBytes());
+            outputStream.close();
+
+            Toast.makeText(this, "Note Saved!"+fileName, Toast.LENGTH_SHORT).show();
             Intent saved = new Intent(MainActivity.this, SelectNote.class);
             MainActivity.this.startActivity(saved);
         } catch (Throwable t) {
@@ -95,30 +119,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public boolean FileExists(String fileName){
-        File file = getBaseContext().getFileStreamPath(fileName);
-        return file.exists();
-    }
-
     public String Open(String fileName) {
         String note = "";
-        if (FileExists(fileName)) {
             try {
-                InputStream in = openFileInput(fileName);
+                FileInputStream in = openFileInput(fileName);
                 if ( in != null) {
-                    InputStreamReader tmp = new InputStreamReader( in );
-                    BufferedReader reader = new BufferedReader(tmp);
-                    String str;
-                    StringBuilder buf = new StringBuilder();
-                    while ((str = reader.readLine()) != null) {
-                        buf.append(str + "\n");
+                    int c;
+                    while( (c = in.read()) != -1){
+                        note = note + Character.toString((char)c);
                     } in .close();
-                    note = buf.toString();
                 }
             } catch (java.io.FileNotFoundException e) {} catch (Throwable t) {
                 Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
             }
-        }
         return note;
     }
 }
