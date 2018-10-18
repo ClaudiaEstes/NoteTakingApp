@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton export = findViewById(R.id.export);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 Save(fileName+".txt");
             }
         });
+
+        export.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         editText1 = (EditText) findViewById(R.id.Note1);
         editText1.setText(Open(fileName+".txt"));
 
