@@ -1,5 +1,6 @@
 package com.cdestes.notetakingapp;
 
+import android.animation.FloatArrayEvaluator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 Save(fileName+".txt");
             }
         });
+<<<<<<< HEAD
         editText1 = (EditText) findViewById(R.id.Note1);
         editText1.setText(Open(fileName+".txt"));
 
@@ -58,6 +60,26 @@ public class MainActivity extends AppCompatActivity {
             editText1.setText(Open(extras));
         }
 
+=======
+
+        FloatingActionButton captureImage = ( FloatingActionButton) findViewById(R.id.captureImage);
+        captureImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent captureIntent = new Intent(getApplicationContext(), Capture_Image.class);
+                startActivity(captureIntent);
+            }
+        });
+
+        FloatingActionButton captureRecording = (FloatingActionButton) findViewById(R.id.capture);
+        captureRecording.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //places function to use recording
+
+            }
+        });
+>>>>>>> ImageAndRecording
     }
 
     @Override
